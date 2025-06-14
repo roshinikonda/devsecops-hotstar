@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hotstar-deployment
+  name: hotstar_v1-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hotstar
+      app: hotstar_v1
   template:
     metadata:
       labels:
-        app: hotstar
+        app: hotstar_v1
     spec:
       containers:
-      - name: hotstar
+      - name: hotstar_v1
         image: roshinikonda/hotstar:latest
         ports:
         - containerPort: 3001
@@ -21,10 +21,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hotstar-service
+  name: hotstar_v1-service
 spec:
   selector:
-    app: hotstar
+    app: hotstar_v1
   ports:
     - protocol: TCP
       port: 80         # Exposes on port 80
