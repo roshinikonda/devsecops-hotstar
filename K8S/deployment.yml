@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hotstar-deployment
 spec:
-  replicas: 1  # Number of desired replicas
+  replicas: 1
   selector:
     matchLabels:
       app: hotstar
@@ -16,4 +16,17 @@ spec:
       - name: hotstar
         image: roshinikonda/hotstar:latest
         ports:
-        - containerPort: 3000  # Port your application listens on
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotstar-service
+spec:
+  selector:
+    app: hotstar
+  ports:
+    - protocol: TCP
+      port: 80         # Exposes on port 80
+      targetPort: 3000 # Maps to containerPort
+  type: LoadBalancer   # Or NodePort for non-cloud
